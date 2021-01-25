@@ -62,6 +62,31 @@ function Search(dataObject, searchValue) {
   return searchResults;
 }
 
+function sortByLocation(prop, type) {
+  return function (a, b) {
+    if (type === "desc") {
+      if (b.items[0].city > a.items[0].city) {
+        return 1;
+      } else if (b.items[0].city < a.items[0].city) {
+        return -1;
+      }
+      return 0;
+    } else {
+      if (a.items[0].city > b.items[0].city) {
+        return 1;
+      } else if (a.items[0].city < b.items[0].city) {
+        return -1;
+      }
+      return 0;
+    }
+  };
+}
+
+function sortingRecords(prop, type = "asc") {
+  if (prop === 'location') return sortByLocation(prop, type);
+  return function (a, b) { return 0 }
+}
+
 export default async (req, res) => {
   res.statusCode = 200
   // @todo: implement filters and search
@@ -75,12 +100,18 @@ export default async (req, res) => {
   const { query } = req;
   let data = jobs;
 
+  // filter by
   if (query.job_type) { data = fetchJobType(data, query.job_type) }
   if (query.work_schedule) { data = fetchWorkSchedule(data, query.work_schedule) }
   if (query.experience) { data = fetchExperience(data, query.experience) }
   if (query.department) { data = fetchDepartment(data, query.department) }
 
+  // searching
   if (query.search) { data = Search(data, query.search); }
 
-  res.json({ jobs: data })
+  // sorting
+  if (query.sort) { data.sort(sortingRecords(query.sort, query?.sortType)); }
+
+  // res.json({ jobs: data })
+  return res.send({ jobs: data })
 }
