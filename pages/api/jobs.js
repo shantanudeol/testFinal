@@ -25,20 +25,12 @@ function filterJobRecords(dataObject, typeName, fieldName) {
   return jobsData;
 }
 
-function fetchJobType(dataObject, jobType) {
-  return filterJobRecords(dataObject, jobType, "job_type");
-}
-
-function fetchWorkSchedule(dataObject, workSchedule) {
-  return filterJobRecords(dataObject, workSchedule, "work_schedule");
-}
-
-function fetchExperience(dataObject, experience) {
-  return filterJobRecords(dataObject, experience, "experience");
-}
-
-function fetchDepartment(dataObject, department) {
-  return filterJobRecords(dataObject, department, "department");
+function filterRecord(dataObject, type, value) {
+  if(type === "job_type") return filterJobRecords(dataObject, value, "job_type");
+  if(type === "work_schedule") return filterJobRecords(dataObject, value, "work_schedule");
+  if(type === "experience") return filterJobRecords(dataObject, value, "experience");
+  if(type === "department") return filterJobRecords(dataObject, value, "experience");
+  else return dataObject;
 }
 
 function Search(dataObject, searchValue) {
@@ -101,10 +93,7 @@ export default async (req, res) => {
   let data = jobs;
 
   // filter by
-  if (query.job_type) { data = fetchJobType(data, query.job_type) }
-  if (query.work_schedule) { data = fetchWorkSchedule(data, query.work_schedule) }
-  if (query.experience) { data = fetchExperience(data, query.experience) }
-  if (query.department) { data = fetchDepartment(data, query.department) }
+  if (query.filterType && query.filterValue) { data = filterRecord(data, query.filterType, query.filterValue) }
 
   // searching
   if (query.search) { data = Search(data, query.search); }
