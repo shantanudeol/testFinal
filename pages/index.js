@@ -79,17 +79,20 @@ const Index = () => {
         <div>
           <SearchBar handleSearch={handleSearch} />
         </div>
-        <div className="grid grid-cols-4 gap-4 ">
+
+
+        <div className="grid grid-cols-5 gap-4 ">
           <div className="grid space-y-4 hidden sm:block ">
             <LeftFilters handleFilter={handleFilter} />
           </div>
-          <div className="col-span-3">
+          <div className="col-span-4">
             {data ? (
               <Content
                 jobs={data.jobs}
                 handleSort={handleSort}
                 sort={query.sort}
                 sortType={query.sortType}
+                total = {data.count}
               />
             ) : null}
           </div>

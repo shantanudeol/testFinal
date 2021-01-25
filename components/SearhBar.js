@@ -20,7 +20,7 @@ export function SearchBar({ search, handleSearch }) {
       <input
         type="text"
         className="py-2 px-4 w-full"
-        placeholder="Search for ant job,title, keywords or company"
+        placeholder="Search for any job,title, keywords or company"
         value={currentState}
         onChange={handleInputChange}
       />

@@ -12,8 +12,8 @@ export function FilterComponent(props) {
   }
   return (
     <>
-      <div className="p-4 bg-white w-auto">
-        <h4 className="p-1 text-lg font-medium ">{props.title}</h4>
+      <div className="p-4 bg-white w-auto rounded-md">
+        <h4 className="py-3 text-lg font-medium uppercase">{props.title}</h4>
         {newList.map((e) => (
           <ClickableObject
             objKey={e.key}

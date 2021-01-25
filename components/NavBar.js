@@ -9,7 +9,7 @@ export function NavBar(props) {
   return (
     <>
       <nav class="bg-white">
-        <div class="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
+        <div class="max-w-8xl mx-auto px-2 sm:px-6 lg:px-8">
           <div class="relative flex items-center justify-between h-16">
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
@@ -63,18 +63,9 @@ export function NavBar(props) {
                 </svg>
               </button>
             </div>
-            <div class="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-              <div class="flex-shrink-0 flex items-center text-blue-500 ">
-                {/* <img
-                  class="block lg:hidden h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-mark-indigo-500.svg"
-                  alt="Workflow"
-                />
-                <img
-                  class="hidden lg:block h-8 w-auto"
-                  src="https://tailwindui.com/img/logos/workflow-logo-indigo-500-mark-white-text.svg"
-                  alt="Workflow"
-                /> */}
+            <div class="flex-1 flex items-center justify-start sm:items-stretch sm:justify-start">
+              <div class="flex-shrink-0 flex items-center text-blue-500 font-bold">
+               
                 HEALTH EXPLORE
               </div>
               <div class="hidden sm:block sm:ml-6">
@@ -134,25 +125,29 @@ export function NavBar(props) {
                   />
                 </svg>
               </button> */}
-              <button className="px-2 py-1 bg-white text-blue-500  hover:text-blue-900 border-solid border-2 border-blue-500 hidden sm:block">
+              <button className=" rounded-lg px-2 py-1 bg-white text-blue-500  hover:text-blue-900 border-solid border-2 border-blue-500 hidden sm:block ">
                 CREATE JOB
               </button>
 
               {/* <!-- Profile dropdown --> */}
               <div class="ml-3 relative ">
                 <div>
-                  <button
+                  {/* <button
                     class="bg-gray-800 flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
                     id="user-menu"
                     aria-haspopup="true"
                   >
                     <span class="sr-only">Open user menu</span>
-                    <img
+                     <img
                       class="h-8 w-8 rounded-full"
                       src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                       alt=""
-                    />
-                  </button>
+                    /> 
+
+                  </button> */}
+                  <span className='p-3 bg-blue-400 text-white rounded-full border-solid border-blue-400'>
+                      JO
+                    </span>
                 </div>
               </div>
             </div>

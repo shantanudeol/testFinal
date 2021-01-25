@@ -6,14 +6,18 @@ export function MainListContent({ item }) {
   function toggleShowSubList() {
     SetSubList((p) => !p);
   }
+  const arr = item.name.split(" ");
   return (
     <div className="grid">
       <div
         key={item.name}
-        className="px-2 py-2 hover:bg-blue-200"
+        className="px-2 py-3 hover:bg-blue-200 bg-white mb-3"
         style={{ cursor: "pointer" }}
         onClick={toggleShowSubList}
       >
+        <span className="p-2 rounded-md bg-gray-200 mr-3">
+          {`${arr[0].charAt(0)}${arr[1].charAt(0)}`}
+        </span>
         {`${item.items?.length} jobs for ${item.name}`}
       </div>
 
