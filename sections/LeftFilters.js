@@ -49,7 +49,7 @@ const filter = [
 ];
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
-export function LeftFilters(props) {
+export function LeftFilters({handleFilter}) {
   const { data, error } = useSwr(`/api/filters`, fetcher);
   console.log("filters", data);
 
@@ -59,7 +59,7 @@ export function LeftFilters(props) {
     for (const [key, value] of Object.entries(data)) {
       arr.push(
         <div className="grid mx-4" key={key}>
-          <FilterComponent title={key} list={value} />
+          <FilterComponent title={key} list={value} handleFilter={handleFilter} />
         </div>
       );
     }

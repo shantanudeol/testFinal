@@ -15,6 +15,8 @@ const Index = () => {
     sort: "title",
     sortType: "asc",
     search: "",
+    filterType: "",
+    filterValue: "",
   });
   //   console.log("data", data[0]);
 
@@ -36,6 +38,9 @@ const Index = () => {
     }
     if (query.search) {
       q += `&search=${query.search}`;
+    }
+    if (query.filterType) {
+      q += `&filterType=${query.filterType}&filterValue=${query.filterValue}`;
     }
     setFinalQuery(q);
   }
@@ -59,13 +64,20 @@ const Index = () => {
     }));
   }
 
+  function handleFilter(obj) {
+    setQuery((prevstate) => ({
+      ...prevstate,
+      filterType: obj.filterType,
+      filterValue: obj.filterValue,
+    }));
+  }
   return (
     <>
       <div className="grid space-y-3 ">
         <NavBar />
         <div className="grid grid-cols-4 gap-4 ">
           <div className="grid space-y-4 ">
-            <LeftFilters />
+            <LeftFilters handleFilter={handleFilter}/>
           </div>
           <div className="col-span-3">
             {data ? <Content jobs={data.jobs} /> : null}
