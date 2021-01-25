@@ -75,16 +75,23 @@ const Index = () => {
   return (
     <>
       <div className="grid space-y-3 ">
-        <NavBar />
+        <NavBar handleFilter={handleFilter} />
         <div>
-          <SearchBar handleSearch={handleSearch}/>
+          <SearchBar handleSearch={handleSearch} />
         </div>
         <div className="grid grid-cols-4 gap-4 ">
-          <div className="grid space-y-4 ">
+          <div className="grid space-y-4 hidden sm:block ">
             <LeftFilters handleFilter={handleFilter} />
           </div>
           <div className="col-span-3">
-            {data ? <Content jobs={data.jobs} handleSort={handleSort} sort={query.sort} sortType={query.sortType} /> : null}
+            {data ? (
+              <Content
+                jobs={data.jobs}
+                handleSort={handleSort}
+                sort={query.sort}
+                sortType={query.sortType}
+              />
+            ) : null}
           </div>
         </div>
       </div>

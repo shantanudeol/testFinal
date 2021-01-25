@@ -5,7 +5,7 @@ export function ContentHeaderBar({ handleSort, sortType, sort }) {
     <>
       <div className="flex ">
         <p>{jobCount} jobs postings</p>
-        <div className="flex justify-end">
+        <div className="flex justify-end hidden sm:block">
           <p>Sort By:</p>
           {sortOptions.map((e) => (
             <ClickableObject data={e} handleSort={handleSort} sort={sort} />

@@ -58,7 +58,7 @@ export function LeftFilters({handleFilter}) {
 
     for (const [key, value] of Object.entries(data)) {
       arr.push(
-        <div className="grid mx-4" key={key}>
+        <div className="grid flex sm:mx-4:" key={key}>
           <FilterComponent title={key} list={value} handleFilter={handleFilter} />
         </div>
       );

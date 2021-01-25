@@ -1,4 +1,11 @@
-export function NavBar() {
+import { useState } from "react";
+import { LeftFilters } from "../sections/LeftFilters";
+
+export function NavBar(props) {
+  const [showFilter, setShowFilter] = useState(false);
+  function ToggleShow() {
+    setShowFilter((prev) => !prev);
+  }
   return (
     <>
       <nav class="bg-white">
@@ -7,6 +14,7 @@ export function NavBar() {
             <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
               {/* <!-- Mobile menu button--> */}
               <button
+              onClick={ToggleShow}
                 class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white"
                 aria-expanded="false"
               >
@@ -103,7 +111,7 @@ export function NavBar() {
                   >
                     Salary
                   </a>
-                  </div>
+                </div>
               </div>
             </div>
             <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0 ">
@@ -126,8 +134,8 @@ export function NavBar() {
                   />
                 </svg>
               </button> */}
-              <button className='px-2 py-1 bg-white text-blue-500  hover:text-blue-900 border-solid border-2 border-blue-500 hidden sm:block'>
-                  CREATE JOB
+              <button className="px-2 py-1 bg-white text-blue-500  hover:text-blue-900 border-solid border-2 border-blue-500 hidden sm:block">
+                CREATE JOB
               </button>
 
               {/* <!-- Profile dropdown --> */}
@@ -146,7 +154,6 @@ export function NavBar() {
                     />
                   </button>
                 </div>
-
               </div>
             </div>
           </div>
@@ -157,34 +164,12 @@ export function NavBar() {
 
     Menu open: "block", Menu closed: "hidden"
   --> */}
-        <div class="hidden sm:hidden">
-          <div class="px-2 pt-2 pb-3 space-y-1">
-            {/* <!-- Current: "bg-gray-900 text-white", Default: "text-black hover:bg-gray-700 hover:text-white" --> */}
-            <a
-              href="#"
-              class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Dashboard
-            </a>
-            <a
-              href="#"
-              class="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Team
-            </a>
-            <a
-              href="#"
-              class="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Projects
-            </a>
-            <a
-              href="#"
-              class="text-black hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Calendar
-            </a>
-          </div>
+        <div class=" sm:hidden">
+          {showFilter ? (
+            <div class="px-2 pt-2 pb-3 space-y-1">
+              <LeftFilters handleFilter={props.handleFilter} />
+            </div>
+          ) : null}
         </div>
       </nav>
     </>
