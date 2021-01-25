@@ -12,8 +12,8 @@ const Index = () => {
   console.log("jobs----->", data);
   const [query, setQuery] = useState({
     limit: 10,
-    sort: "title",
-    sortType: "asc",
+    sort: "",
+    sortType: "",
     search: "",
     filterType: "",
     filterValue: "",
@@ -80,7 +80,7 @@ const Index = () => {
             <LeftFilters handleFilter={handleFilter} />
           </div>
           <div className="col-span-3">
-            {data ? <Content jobs={data.jobs} handleSort={handleSort} /> : null}
+            {data ? <Content jobs={data.jobs} handleSort={handleSort} sort={query.sort} sortType={query.sortType} /> : null}
           </div>
         </div>
       </div>
