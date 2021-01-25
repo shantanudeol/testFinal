@@ -1,19 +1,18 @@
-import jobs from '../../data/jobs'
-
+import jobs from '../../data/jobs.json'
 
 function filterJobRecords(dataObject, typeName, fieldName) {
   const jobsData = [];
-  for (let i = 0; i < dataObject.length; i++) {
-    const items = dataObject[i].items;
+  for (let i = 0; i < dataObject.length; i += 1) {
+    const { items } = dataObject[i];
     let mapItems = []
-    if (fieldName === "department") {
-      mapItems = items.filter(item => {
+    if (fieldName === 'department') {
+      mapItems = items.filter((item) => {
         if (item[fieldName].includes(typeName)) {
           return item;
         }
       })
     } else {
-      mapItems = items.filter(item => {
+      mapItems = items.filter((item) => {
         if (item[fieldName] === typeName) {
           return item;
         }
@@ -26,17 +25,17 @@ function filterJobRecords(dataObject, typeName, fieldName) {
 }
 
 function filterRecord(dataObject, type, value) {
-  if (type === "job_type") return filterJobRecords(dataObject, value, "job_type");
-  if (type === "work_schedule") return filterJobRecords(dataObject, value, "work_schedule");
-  if (type === "experience") return filterJobRecords(dataObject, value, "experience");
-  if (type === "department") return filterJobRecords(dataObject, value, "experience");
-  else return dataObject;
+  if (type === 'job_type') return filterJobRecords(dataObject, value, 'job_type');
+  if (type === 'work_schedule') return filterJobRecords(dataObject, value, 'work_schedule');
+  if (type === 'experience') return filterJobRecords(dataObject, value, 'experience');
+  if (type === 'department') return filterJobRecords(dataObject, value, 'experience');
+  return dataObject;
 }
 
 function Search(dataObject, searchValue) {
   const searchResults = [];
-  for (let i = 0; i < dataObject.length; i++) {
-    const regSearch = new RegExp(searchValue, "i");
+  for (let i = 0; i < dataObject.length; i += 1) {
+    const regSearch = new RegExp(searchValue, 'i');
     if (dataObject[i].name.match(regSearch) || dataObject[i].job_title.match(regSearch)) {
       searchResults.push(dataObject[i]);
     } else {
@@ -56,7 +55,7 @@ function Search(dataObject, searchValue) {
 
 function sortByLocation(prop, type) {
   return function (a, b) {
-    if (type === "desc") {
+    if (type === 'desc') {
       if (b.items[0].city > a.items[0].city) {
         return 1;
       } else if (b.items[0].city < a.items[0].city) {
@@ -74,9 +73,9 @@ function sortByLocation(prop, type) {
   };
 }
 
-function sortingRecords(prop, type = "asc") {
+function sortingRecords(prop, type = 'asc') {
   if (prop === 'location') return sortByLocation(prop, type);
-  return function (a, b) { return 0 }
+  return function () { return 0 }
 }
 
 export default async (req, res) => {
@@ -103,7 +102,7 @@ export default async (req, res) => {
 
   // jobs count
   let jobCount = 0;
-  for (let i = 0; i < data.length; i++) {
+  for (let i = 0; i < data.length; i += 1) {
     jobCount += data[i].items.length;
   }
 
