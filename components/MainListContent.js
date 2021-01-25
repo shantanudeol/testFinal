@@ -14,7 +14,7 @@ export function MainListContent({ item }) {
         style={{ cursor: "pointer" }}
         onClick={toggleShowSubList}
       >
-        {`${item.total_jobs_in_hospital} jobs for ${item.name}`}
+        {`${item.items?.length} jobs for ${item.name}`}
       </div>
 
       {showSubList ? <SubList items={item.items} /> : null}

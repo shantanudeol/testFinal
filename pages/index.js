@@ -49,7 +49,7 @@ const Index = () => {
     QueryBuilder();
   }, [query]);
 
-  function handleSort(sort, sortType) {
+  function handleSort({ sort, sortType }) {
     setQuery((prevstate) => ({
       ...prevstate,
       sort: sort,
@@ -77,10 +77,10 @@ const Index = () => {
         <NavBar />
         <div className="grid grid-cols-4 gap-4 ">
           <div className="grid space-y-4 ">
-            <LeftFilters handleFilter={handleFilter}/>
+            <LeftFilters handleFilter={handleFilter} />
           </div>
           <div className="col-span-3">
-            {data ? <Content jobs={data.jobs} /> : null}
+            {data ? <Content jobs={data.jobs} handleSort={handleSort} /> : null}
           </div>
         </div>
       </div>

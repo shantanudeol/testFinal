@@ -19,7 +19,6 @@ export function FilterComponent(props) {
 }
 
 function ClickableObject(props) {
-  console.log('clickable ',props);
   function handleOnClick() {
     props.handleFilter({ filterType: props.title, filterValue: props.objKey });
   }

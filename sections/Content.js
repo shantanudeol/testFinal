@@ -5,7 +5,7 @@ export function Content(props){
     return(
         <>
         <div className="grid ">
-            <ContentHeaderBar />
+            <ContentHeaderBar handleSort={props.handleSort}/>
             <MainList {...props} />
         </div>
         </>
