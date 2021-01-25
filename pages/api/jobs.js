@@ -73,15 +73,42 @@ function sortByLocation(prop, type) {
   };
 }
 
+function sortInsideTheItems(prop, type) {
+  return function (a, b) {
+    if (type === 'desc') {
+      if (b[prop] > a[prop]) {
+        return 1;
+      } else if (b[prop] < a[prop]) {
+        return -1;
+      }
+      return 0;
+    } else {
+      if (a[prop] > b[prop]) {
+        return 1;
+      } else if (a[prop] < b[prop]) {
+        return -1;
+      }
+      return 0;
+    }
+  };
+}
+
 function sortingRecords(prop, type = 'asc') {
   if (prop === 'location') return sortByLocation(prop, type);
   return function () { return 0 }
 }
 
+function sortingRecordsInsideHospital(dataObject, prop, type = 'asc') {
+  const jsonData = [];
+  for (let i = 0; i < dataObject.length; i++) {
+    const sortItems = dataObject[i].items.sort(sortInsideTheItems(prop, type));
+    jsonData.push({ ...dataObject[i], items: sortItems });
+  }
+  return jsonData;
+}
+
 export default async (req, res) => {
   res.statusCode = 200
-  // @todo: implement filters and search
-  // @todo: implement automated tests
 
   // this timeout emulates unstable network connection, do not remove this one
   // you need to figure out how to guarantee that client side will render
@@ -91,14 +118,13 @@ export default async (req, res) => {
   const { query } = req;
   let data = jobs;
 
-  // filter by
+  // @todo: implementing filters and search
   if (query.filterType && query.filterValue) { data = filterRecord(data, query.filterType, query.filterValue) }
-
-  // searching
   if (query.search) { data = Search(data, query.search); }
-
-  // sorting
-  if (query.sort) { data.sort(sortingRecords(query.sort, query?.sortType)); }
+  if (query.sort) {
+    if (query.sort === 'location') data.sort(sortingRecords(query.sort, query?.sortType));
+    else sortingRecordsInsideHospital(data, query.sort, query?.sortType)
+  }
 
   // jobs count
   let jobCount = 0;
