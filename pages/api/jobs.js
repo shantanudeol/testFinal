@@ -1,15 +1,15 @@
 import jobs from '../../data/jobs'
 
 function fetchJobType(dataObject, jobType = "Full-time") {
-  const jobsData = [...dataObject];
-  for (let i = 0; i < jobsData.length; i++) {
-    const items = jobsData[i].items;
+  const jobsData = [];
+  for (let i = 0; i < dataObject.length; i++) {
+    const items = dataObject[i].items;
     const mapItems = items.filter(item => {
       if (item.job_type === jobType) {
         return item;
       }
     })
-    jobsData[i].items = mapItems;
+    jobsData.push({ ...dataObject[i], items: mapItems })
   }
   return jobsData;
 }
