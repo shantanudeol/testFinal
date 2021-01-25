@@ -1,17 +1,44 @@
 import jobs from '../../data/jobs'
 
-function fetchJobType(dataObject, jobType = "Full-time") {
+
+function filterJobRecords(dataObject, typeName, fieldName) {
   const jobsData = [];
   for (let i = 0; i < dataObject.length; i++) {
     const items = dataObject[i].items;
-    const mapItems = items.filter(item => {
-      if (item.job_type === jobType) {
-        return item;
-      }
-    })
+    let mapItems = []
+    if (fieldName === "department") {
+      mapItems = items.filter(item => {
+        if (item[fieldName].includes(typeName)) {
+          return item;
+        }
+      })
+    } else {
+      mapItems = items.filter(item => {
+        if (item[fieldName] === typeName) {
+          return item;
+        }
+      })
+    }
+
     jobsData.push({ ...dataObject[i], items: mapItems })
   }
   return jobsData;
+}
+
+function fetchJobType(dataObject, jobType) {
+  return filterJobRecords(dataObject, jobType, "job_type");
+}
+
+function fetchWorkSchedule(dataObject, workSchedule) {
+  return filterJobRecords(dataObject, workSchedule, "work_schedule");
+}
+
+function fetchExperience(dataObject, experience) {
+  return filterJobRecords(dataObject, experience, "experience");
+}
+
+function fetchDepartment(dataObject, department) {
+  return filterJobRecords(dataObject, department, "department");
 }
 
 function Search(dataObject, searchValue) {
@@ -49,6 +76,9 @@ export default async (req, res) => {
   let data = jobs;
 
   if (query.job_type) { data = fetchJobType(data, query.job_type) }
+  if (query.work_schedule) { data = fetchWorkSchedule(data, query.work_schedule) }
+  if (query.experience) { data = fetchExperience(data, query.experience) }
+  if (query.department) { data = fetchDepartment(data, query.department) }
 
   if (query.search) { data = Search(data, query.search); }
 
