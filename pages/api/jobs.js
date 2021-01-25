@@ -26,10 +26,10 @@ function filterJobRecords(dataObject, typeName, fieldName) {
 }
 
 function filterRecord(dataObject, type, value) {
-  if(type === "job_type") return filterJobRecords(dataObject, value, "job_type");
-  if(type === "work_schedule") return filterJobRecords(dataObject, value, "work_schedule");
-  if(type === "experience") return filterJobRecords(dataObject, value, "experience");
-  if(type === "department") return filterJobRecords(dataObject, value, "experience");
+  if (type === "job_type") return filterJobRecords(dataObject, value, "job_type");
+  if (type === "work_schedule") return filterJobRecords(dataObject, value, "work_schedule");
+  if (type === "experience") return filterJobRecords(dataObject, value, "experience");
+  if (type === "department") return filterJobRecords(dataObject, value, "experience");
   else return dataObject;
 }
 
@@ -101,6 +101,11 @@ export default async (req, res) => {
   // sorting
   if (query.sort) { data.sort(sortingRecords(query.sort, query?.sortType)); }
 
-  // res.json({ jobs: data })
-  return res.send({ jobs: data })
+  // jobs count
+  let jobCount = 0;
+  for (let i = 0; i < data.length; i++) {
+    jobCount += data[i].items.length;
+  }
+
+  return res.send({ count: jobCount, jobs: data })
 }
