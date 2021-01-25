@@ -112,5 +112,6 @@ export default async (req, res) => {
   // sorting
   if (query.sort) { data.sort(sortingRecords(query.sort, query?.sortType)); }
 
-  res.json({ jobs: data })
+  // res.json({ jobs: data })
+  return res.send({ jobs: data })
 }
