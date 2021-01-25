@@ -3,6 +3,7 @@ import { Content } from "../sections/Content";
 import { LeftFilters } from "../sections/LeftFilters";
 import { useEffect, useState } from "react";
 import useSwr from "swr";
+import { SearchBar } from "../components/SearhBar";
 const fetcher = (url) => fetch(url).then((res) => res.json());
 
 const Index = () => {
@@ -75,6 +76,9 @@ const Index = () => {
     <>
       <div className="grid space-y-3 ">
         <NavBar />
+        <div>
+          <SearchBar handleSearch={handleSearch}/>
+        </div>
         <div className="grid grid-cols-4 gap-4 ">
           <div className="grid space-y-4 ">
             <LeftFilters handleFilter={handleFilter} />
